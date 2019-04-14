@@ -8,6 +8,8 @@ import display.Display;
 
 public class Game implements Runnable {
 
+	private final double ONE_BILLION = 1000000000;
+	
 	private Display display;
 
 	public int width, height;
@@ -54,9 +56,33 @@ public class Game implements Runnable {
 	@Override
 	public void run() {
 		init();
+		
+		int fps = 60;
+		double timePerTick = ONE_BILLION / fps;
+		double delta = 0;
+		long currentTime;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
 		while(running) {
-			update();
-			render();
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / timePerTick;
+			timer += currentTime - lastTime;
+			lastTime = currentTime;
+			
+			if(delta >= 1) {
+				update();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if(timer >= ONE_BILLION) {
+				System.out.println("FPS = " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
 		}
 		
 		stop();
