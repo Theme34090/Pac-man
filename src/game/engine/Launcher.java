@@ -1,12 +1,12 @@
-package game.engine;
+package game;
 
-import game.display.Display;
+import display.Display;
 
 public class Launcher {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Game_OLD game = new Game_OLD("Title", 300, 300);
+		Game game = new Game("Title", 300, 300);
 		game.start();
 	}
 
