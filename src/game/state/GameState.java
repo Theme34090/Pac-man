@@ -14,6 +14,7 @@ public class GameState extends State {
 	public GameState(GameThread gameThread) {
 		super(gameThread);
 		player = new Player(gameThread, 100, 100);
+		System.out.println("GameState init");
 	}
 	
 	@Override

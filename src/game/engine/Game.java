@@ -1,13 +1,10 @@
 package game.engine;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import game.graphics.Assets;
 import game.listener.KeyboardListener;
 import game.listener.MousepadListener;
-import game.state.GameState;
-import game.state.MenuState;
-import game.state.State;
 
 public class Game {
 
@@ -16,8 +13,7 @@ public class Game {
 	private final GameThread gameThread;
 	private final KeyboardListener keyboardListener;
 	private final MousepadListener mousepadListener;
-	
-	private Thread thread;
+	private JPanel panel;
 
 	public Game(int window_x, int window_y, String title) {
 		frame.setSize(window_x, window_x);
@@ -27,19 +23,20 @@ public class Game {
 		frame.setLocationRelativeTo(null); // Open window in the center of the screen
 		frame.setTitle(title);
 		frame.setVisible(true);
-		
+
+		this.panel = new SplitJPanel(this);
 		this.screenFactory = new ScreenFactory(this);
 		this.gameThread = new GameThread(this);
 		this.keyboardListener = new KeyboardListener();
 		this.mousepadListener = new MousepadListener();
 
-		frame.add(gameThread); // Mean adding JPanel to window
+		frame.add(panel); // Mean adding JPanel to window
 		frame.addKeyListener(keyboardListener);
 		frame.addMouseListener(mousepadListener);
 
 		gameThread.start();
 	}
-	
+
 	public MousepadListener getMouseListener() {
 		return mousepadListener;
 	}
@@ -63,5 +60,5 @@ public class Game {
 	public JFrame getWindow() {
 		return frame;
 	}
-	
+
 }

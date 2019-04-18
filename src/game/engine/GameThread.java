@@ -11,10 +11,9 @@ import game.state.GameState;
 import game.state.MenuState;
 import game.state.State;
 
-public class GameThread extends JPanel implements Runnable {
+public class GameThread implements Runnable /*implements JPanel */ {
 
 	// Static stuff
-	private static final long serialVersionUID = 1L;
 	private static final double ONE_BILLION = 1000000000;
 
 	private final Game game;
@@ -30,7 +29,7 @@ public class GameThread extends JPanel implements Runnable {
 
 	public GameThread(Game game) {
 		this.game = game;
-		setFocusable(true); // Let JPanel get input from the keyboard
+		System.out.println("Thread init");
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class GameThread extends JPanel implements Runnable {
 	
 	public void init() {
 		Assets.init();
-
+		System.out.println("Thread started");
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
 		State.setState(gameState);
@@ -107,17 +106,19 @@ public class GameThread extends JPanel implements Runnable {
 		thread.start();
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // Keep game from
-																									// lagging
-		if (game.getScreenFactory().getCurrentScreen() != null) {
-			game.getScreenFactory().getCurrentScreen().onDraw(g2d);
-		}
-		repaint();
-	}
+//	@Override
+//	public void paint(Graphics g) {
+//		System.out.println("Painting");
+//		super.paint(g);
+//		Graphics2D g2d = (Graphics2D) g;
+//		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // Keep game from
+//																									// lagging
+//		if (game.getScreenFactory().getCurrentScreen() != null) {
+//			game.getScreenFactory().getCurrentScreen().onDraw(g2d);
+//		}
+//		System.out.println("done Painting");
+//		repaint();
+//	}
 
 	// Getters & Setters
 	

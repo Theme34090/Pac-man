@@ -16,15 +16,16 @@ public class Player extends Creatures {
 		super(x, y, Creatures.DEFAULT_CREATURE_WIDTH, Creatures.DEFAULT_CREATURE_HEIGHT);
 		this.gameThread = gameThread;
 		this.game = gameThread.getGame();
+		System.out.println("Player init");
 	}
 
 	@Override
 	public void update() {
-		getInput();
+		getKeyboardInput();
 		move();
 	}
 
-	private void getInput() {
+	private void getKeyboardInput() {
 		xMove = 0;
 		yMove = 0;
 

@@ -70,15 +70,17 @@ public class GameScreen extends Screen {
 		g2d.drawString("y = " + y, 50, 40);
 
 		// draw game
-		//gameThread.getGameState().render(g2d); // draw player
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				Tile.tiles[0].render(g2d, i, j);
-			}
-		}
-//		g2d.setColor(Color.black);
-//		g2d.fill3DRect(x, y, 64, 64, true);
-//		
+		gameThread.getGameState().render(g2d); // draw player
+		
+//		for (int i = 0; i < 9; i++) {
+//			for (int j = 0; j < 9; j++) {
+//				Tile.tiles[0].render(g2d, i, j);
+//			}
+//		}
+		
+		g2d.setColor(Color.black);
+		g2d.fill3DRect(x, y, 64, 64, true);
+		
 
 	}
 
