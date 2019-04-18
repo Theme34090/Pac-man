@@ -2,12 +2,12 @@ package game.state;
 
 import java.awt.Graphics;
 
-import game.Game;
+import game.engine.GameThread;
 
 public class MenuState extends State {
 
-	public MenuState(Game game) {
-		super(game);
+	public MenuState(GameThread gameThread) {
+		super(gameThread);
 		// TODO Auto-generated constructor stub
 	}
 

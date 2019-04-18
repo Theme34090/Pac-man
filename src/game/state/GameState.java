@@ -2,7 +2,7 @@ package game.state;
 
 import java.awt.Graphics;
 
-import game.Game;
+import game.engine.GameThread;
 import game.entity.creature.Player;
 import game.tile.Tile;
 
@@ -10,9 +10,9 @@ public class GameState extends State {
 
 	private Player player;
 	
-	public GameState(Game game) {
-		super(game);
-		player = new Player(game, 100, 100);
+	public GameState(GameThread gameThread) {
+		super(gameThread);
+		player = new Player(gameThread, 100, 100);
 	}
 	
 	@Override
