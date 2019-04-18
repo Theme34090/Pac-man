@@ -2,8 +2,12 @@ package game.engine;
 
 import javax.swing.JFrame;
 
+import game.graphics.Assets;
 import game.listener.KeyboardListener;
 import game.listener.MousepadListener;
+import game.state.GameState;
+import game.state.MenuState;
+import game.state.State;
 
 public class Game {
 
@@ -36,7 +40,6 @@ public class Game {
 		gameThread.start();
 	}
 	
-
 	public MousepadListener getMouseListener() {
 		return mousepadListener;
 	}
@@ -60,4 +63,5 @@ public class Game {
 	public JFrame getWindow() {
 		return frame;
 	}
+	
 }

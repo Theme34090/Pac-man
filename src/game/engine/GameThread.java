@@ -6,15 +6,26 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import game.graphics.Assets;
+import game.state.GameState;
+import game.state.MenuState;
+import game.state.State;
+
 public class GameThread extends JPanel implements Runnable {
 
+	// Static stuff
 	private static final long serialVersionUID = 1L;
 	private static final double ONE_BILLION = 1000000000;
 
 	private final Game game;
 
+	// Thread stuff
 	private boolean running;
 	private Thread thread;
+	
+	// States
+	private GameState gameState;
+	private MenuState menuState;
 
 	public GameThread(Game game) {
 		this.game = game;
@@ -41,7 +52,8 @@ public class GameThread extends JPanel implements Runnable {
 				lastTime = currentTime;
 
 				if (delta >= 1) {
-					screen.onUpdate();
+					screen.onUpdate(); // TODO rename onUpdate to render? avoiding confuse with this.update()
+					update();
 					ticks++;
 					delta--;
 				}
@@ -67,6 +79,19 @@ public class GameThread extends JPanel implements Runnable {
 //				e.printStackTrace();
 //			}
 		}
+	}
+	
+	public void init() {
+		Assets.init();
+
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
+		State.setState(gameState);
+	}
+
+	
+	public void update() {
+		game.getKeyboardListener().update();
 	}
 	
 	public synchronized void start() {
@@ -105,4 +130,9 @@ public class GameThread extends JPanel implements Runnable {
 		repaint();
 	}
 
+	// Getters & Setters
+	
+	public Game getGame() {
+		return game;
+	}
 }
