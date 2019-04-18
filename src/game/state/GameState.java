@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import game.Game;
 import game.entity.creature.Player;
+import game.tile.Tile;
 
 public class GameState extends State {
 

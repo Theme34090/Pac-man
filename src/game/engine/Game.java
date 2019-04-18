@@ -12,6 +12,8 @@ public class Game {
 	private final GameThread gameThread;
 	private final KeyboardListener keyboardListener;
 	private final MousepadListener mousepadListener;
+	
+	private Thread thread;
 
 	public Game(int window_x, int window_y, String title) {
 		frame.setSize(window_x, window_x);
@@ -21,6 +23,7 @@ public class Game {
 		frame.setLocationRelativeTo(null); // Open window in the center of the screen
 		frame.setTitle(title);
 		frame.setVisible(true);
+		
 		this.screenFactory = new ScreenFactory(this);
 		this.gameThread = new GameThread(this);
 		this.keyboardListener = new KeyboardListener();
@@ -30,9 +33,9 @@ public class Game {
 		frame.addKeyListener(keyboardListener);
 		frame.addMouseListener(mousepadListener);
 
-		new Thread(gameThread).start();
-		;
+		gameThread.start();
 	}
+	
 
 	public MousepadListener getMouseListener() {
 		return mousepadListener;
