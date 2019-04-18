@@ -1,6 +1,7 @@
 package game.state;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import game.engine.GameThread;
 
@@ -22,12 +23,12 @@ public abstract class State {
 
 	protected GameThread gameThread;
 
-	public State(GameThread gameThreadThread) {
+	public State(GameThread gameThread) {
 		this.gameThread = gameThread;
 	}
 
 	public abstract void update();
 
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics2D g2d);
 
 }

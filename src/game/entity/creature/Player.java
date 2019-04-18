@@ -1,6 +1,7 @@
 package game.entity.creature;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import game.engine.Game;
 import game.engine.GameThread;
@@ -42,8 +43,8 @@ public class Player extends Creatures {
 	}
 
 	@Override
-	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int) x, (int) y, width, height, null);
+	public void render(Graphics2D g2d) {
+		g2d.drawImage(Assets.player, (int) x, (int) y, width, height, null);
 	}
 
 }

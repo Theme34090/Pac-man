@@ -1,6 +1,7 @@
 package game.tile;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Tile {
@@ -22,7 +23,7 @@ public class Tile {
 		this.texture = texture;
 		this.id = id;
 		
-		// add each tile to array
+		// add each tile to array with id as index
 		tiles[id] = this;
 	}
 
@@ -31,12 +32,12 @@ public class Tile {
 	}
 	
 	// Check if creatures able to walk over tile
-	public boolean isSolid() {
+	public boolean isWalkable() {
 		return true;
 	}
 
-	public void render(Graphics g, int x, int y) {
-		g.drawImage(texture, x, y, TILE_WIDTH, TILE_HEIGHT, null);
+	public void render(Graphics2D g2d, int x, int y) {
+		g2d.drawImage(texture, x, y, TILE_WIDTH, TILE_HEIGHT, null);
 	}
 
 	public int getId() {

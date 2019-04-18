@@ -18,6 +18,7 @@ public class GameThread extends JPanel implements Runnable {
 	private static final double ONE_BILLION = 1000000000;
 
 	private final Game game;
+	private int currentFPS;
 
 	// Thread stuff
 	private boolean running;
@@ -35,7 +36,8 @@ public class GameThread extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		while (running) {
-
+			init();
+			
 			int fps = 60;
 			double timePerTick = ONE_BILLION / fps;
 			double delta = 0;
@@ -60,6 +62,7 @@ public class GameThread extends JPanel implements Runnable {
 
 				if (timer >= ONE_BILLION) {
 					System.out.println("FPS = " + ticks);
+					this.currentFPS = ticks;
 					ticks = 0;
 					timer = 0;
 				}
@@ -89,33 +92,19 @@ public class GameThread extends JPanel implements Runnable {
 		State.setState(gameState);
 	}
 
-	
+	// update gameThread status each frame
 	public void update() {
 		game.getKeyboardListener().update();
+		gameState.update();
 	}
 	
+	// Starting gameThread properly
 	public synchronized void start() {
 		if(running)
 			return;
 		running = true;
 		thread = new Thread(this);
 		thread.start();
-	}
-
-	public float getFPS() {
-		long currentTime;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-
-		currentTime = System.nanoTime();
-		timer += currentTime - lastTime;
-		lastTime = currentTime;
-
-		if (timer >= ONE_BILLION) {
-			return ticks;
-		}
-		return -1;
 	}
 
 	@Override
@@ -134,5 +123,13 @@ public class GameThread extends JPanel implements Runnable {
 	
 	public Game getGame() {
 		return game;
+	}
+	
+	public int getCurrentFPS() {
+		return currentFPS;
+	}
+
+	public GameState getGameState() {
+		return gameState;
 	}
 }

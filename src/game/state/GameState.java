@@ -1,6 +1,7 @@
 package game.state;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import game.engine.GameThread;
 import game.entity.creature.Player;
@@ -21,8 +22,8 @@ public class GameState extends State {
 	}
 
 	@Override
-	public void render(Graphics g) {
-		player.render(g);
+	public void render(Graphics2D g2d) {
+		player.render(g2d);
 	}
 
 }
